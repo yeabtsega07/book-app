@@ -16,8 +16,9 @@ import {
   Draggable,
   DropResult,
 } from "@hello-pangea/dnd";
-import { Grip, Trash } from "lucide-react";
+import { Edit, Grip, Trash } from "lucide-react";
 import { Button } from "./ui/button";
+import { EditBookModal } from "./modal/edit-book-modal";
 
 interface BooksListProps {
   items: Book[];
@@ -119,6 +120,24 @@ export const BooksList = ({ items }: BooksListProps) => {
                       >
                         <Trash className="h-4 w-4" />
                       </Button>
+                      {
+                        book.status === "completed" ? (
+                          <EditBookModal currentBook={book}>
+                            <Button size={"sm"} disabled={true}>
+                              <Edit className="h-4 w-4" />
+                            </Button>
+                          </EditBookModal>
+
+                        ) : (
+                          <EditBookModal currentBook={book}>
+                            <Button size={"sm"}>
+                              <Edit className="h-4 w-4" />
+                            </Button>
+                          </EditBookModal>
+
+
+                        )
+                      }
                     </div>
                   </div>
                 )}

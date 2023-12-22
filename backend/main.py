@@ -41,3 +41,7 @@ def update_book(book_id: str, status: str):
 @app.delete("/books/{book_id}")
 def delete_book(book_id: str):
     return repo.delete(book_id)
+
+@app.put("/books/{book_id}")
+def update_book_title(book_id: str, title: str):
+    return repo.update_book_title(book_id, title)

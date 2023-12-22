@@ -44,3 +44,10 @@ class BookRepository:
         cursor.execute(query, (book_id,))
         self.cnx.commit()
         return {"message": "Book deleted successfully"} if cursor.rowcount else None
+    
+    def update_book_title(self, book_id: str, title: str):
+        cursor = self.cnx.cursor()
+        query = ("UPDATE books SET title = ? WHERE id = ? AND status != 'completed'")
+        cursor.execute(query, (title, book_id))
+        self.cnx.commit()
+        return {"message": "Book updated successfully"} if cursor.rowcount else None

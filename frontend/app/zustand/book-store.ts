@@ -7,6 +7,7 @@ type Store = {
   setBooks: (books: Book[]) => void;
   moveBook: (bookId: number, status: Book["status"]) => void;
   deleteBook: (bookId: number) => void;
+  updateBook: (bookId: number, title: Book["title"]) => void;
 };
 
 const useStore = create<Store>((set) => ({
@@ -25,6 +26,14 @@ const useStore = create<Store>((set) => ({
     set((state) => ({
       books: state.books.filter((book) => book.id !== bookId),
     })),
+  updateBook: (bookId, title) =>
+    set((state) => {
+      const bookIndex = state.books.findIndex((book) => book.id === bookId);
+      if (bookIndex > -1) {
+        state.books[bookIndex].title = title;
+      }
+      return { books: [...state.books] };
+    }),
 }));
 
 export default useStore;
